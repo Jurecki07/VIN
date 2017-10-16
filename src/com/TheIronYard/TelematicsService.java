@@ -1,6 +1,8 @@
 package com.TheIronYard;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -12,20 +14,20 @@ import java.util.Scanner;
 public class TelematicsService {
 
     public static String tableCont;
+
     public static ArrayList<String> rowColl;
 
     public static ArrayList<String> getRowColl() {
         if (rowColl == null) {
-            return new ArrayList<>();
+            rowColl = new ArrayList<>();
         }
         return rowColl;
     }
 
-    void report(VehicleInfo vehicleInfo){
+    void report(VehicleInfo vehicleInfo) {
         tableCont = "";
-        if (rowColl == null) {
-            rowColl = new ArrayList<>();
-        }
+
+        rowColl = getRowColl();
 
         ObjectMapper mapper = new ObjectMapper();
 
@@ -36,11 +38,10 @@ public class TelematicsService {
                 FileWriter fileWriter = new FileWriter(outputFile);
                 fileWriter.write(json);
                 fileWriter.close();
-            }
-            catch (IOException e) {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
-        } catch(JsonProcessingException e){
+        } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
 
@@ -49,17 +50,17 @@ public class TelematicsService {
         File file = new File(".");
         for (File f : file.listFiles()) {
             if (f.getName().endsWith(".json")) {
-                try{ Scanner fileScanner = new Scanner(f);
-                     String json = fileScanner.nextLine();
-                    try{
+                try {
+                    Scanner fileScanner = new Scanner(f);
+                    String json = fileScanner.nextLine();
+                    try {
                         ObjectMapper readMapper = new ObjectMapper();
                         VehicleInfo vi = readMapper.readValue(json, VehicleInfo.class);
                         myGarage.add(vi);
-                    }
-                    catch(IOException e){
+                    } catch (IOException e) {
                         e.printStackTrace();
                     }
-                }catch(FileNotFoundException e) {
+                } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
             }
@@ -84,20 +85,20 @@ public class TelematicsService {
             rowColl.add(rowItem);
         }
 
-        for(String row: rowColl){
+        for (String row : rowColl) {
             tableCont += row;
         }
 
         String dashboardhtml = "<html>\n" +
                 "<title>Vehicle Telematics Dashboard</title>\n" +
                 "<body>\n" +
-                "<h1 align=\"center\">Averages for "+ rowColl.size() +" vehicles</h1>\n" +
+                "<h1 align=\"center\">Averages for " + rowColl.size() + " vehicles</h1>\n" +
                 "<table align=\"center\">\n" +
                 "    <tr>\n" +
                 "        <th>Odometer (miles) |</th><th>Consumption (gallons) |</th><th>Last Oil Change |</th><th>Engine Size (liters)</th>\n" +
                 "    </tr>\n" +
                 "    <tr>\n" +
-                "        <td align=\"center\">"+ (odometerTotal/ rowColl.size()) +"</td><td align=\"center\">"+ (consumptionTotal/ rowColl.size()) +"</td><td align=\"center\">"+ (lastServiceTotal/ rowColl.size()) +"</td><td align=\"center\">"+ (engineDisplacementTotal/ rowColl.size()) +"</td>\n" +
+                "        <td align=\"center\">" + (odometerTotal / rowColl.size()) + "</td><td align=\"center\">" + (consumptionTotal / rowColl.size()) + "</td><td align=\"center\">" + (lastServiceTotal / rowColl.size()) + "</td><td align=\"center\">" + (engineDisplacementTotal / rowColl.size()) + "</td>\n" +
                 "    </tr>\n" +
                 "</table>\n" +
                 "<h1 align=\"center\">History</h1>\n" +
@@ -115,9 +116,9 @@ public class TelematicsService {
                 "</html>\n";
 
         File dashboard = new File("dashboard.html");
-        try( FileWriter dashboardWriter = new FileWriter(dashboard)) {
+        try (FileWriter dashboardWriter = new FileWriter(dashboard)) {
             dashboardWriter.write(dashboardhtml);
-        } catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
