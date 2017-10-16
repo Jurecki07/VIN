@@ -9,16 +9,16 @@ public class Main {
 
         VehicleInfo newVehicle = new VehicleInfo();
 
-        System.out.println("Enter your Vehicles VIN");
+        System.out.println("Enter your VIN");
         newVehicle.setVIN(sc.nextInt());
 
-        System.out.println("Enter your odometer reading");
+        System.out.println("Please enter your odometer reading");
         newVehicle.setOdometer(sc.nextDouble());
 
-        System.out.println("Enter your fuel consumption");
+        System.out.println("What is your fuel consumption average");
         newVehicle.setConsumption(sc.nextDouble());
 
-        System.out.println("Enter your odometer reading at time of last oil change");
+        System.out.println("Miles of last Service");
         newVehicle.setOdometerAtLastService(sc.nextDouble());
 
         System.out.println("Enter your engine displacement");
