@@ -30,14 +30,13 @@ public class TelematicsService {
         rowColl = getRowColl();
 
         ObjectMapper mapper = new ObjectMapper();
-
         try {
             String json = mapper.writeValueAsString(vehicleInfo);
             try {
                 File outputFile = new File(Integer.toString(vehicleInfo.getVIN()) + ".json");
                 FileWriter fileWriter = new FileWriter(outputFile);
                 fileWriter.write(json);
-                fileWriter.close();
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
