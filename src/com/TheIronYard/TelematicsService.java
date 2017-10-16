@@ -12,6 +12,10 @@ import java.util.List;
 import java.util.Scanner;
 
 public class TelematicsService {
+    void Report(VehicleInfo vehicleInfo) {
+        String fileName = Integer.toString(vehicleInfo.getVIN()) + ".json";
+        ObjectMapper mapper = new ObjectMapper();
 
-
+    }
 }
+
