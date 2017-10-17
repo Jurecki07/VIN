@@ -24,11 +24,22 @@ public class Main {
         vehicleInfo.setEngineDisplacement(sc.nextDouble());
 
 
+// Creating the object from our blueprint vehicleInfo
+        TelematicsService telematicsService = new TelematicsService();
 
-
+        // calling telematics service method
+        telematicsService.Report(vehicleInfo);
 
     }
 
 }
+
+
+
+
+
+
+
+
 
 
