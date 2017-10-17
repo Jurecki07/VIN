@@ -1,11 +1,14 @@
 package com.TheIronYard;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Scanner sc = new Scanner(System.in);
+
+        // created vechile object
         VehicleInfo vehicleInfo = new VehicleInfo();
 
         System.out.println("Enter Your Vin");
@@ -24,11 +27,12 @@ public class Main {
         vehicleInfo.setEngineDisplacement(sc.nextDouble());
 
 
-// Creating the object from our blueprint vehicleInfo
+// Creating the service
         TelematicsService telematicsService = new TelematicsService();
 
-        // calling telematics service method
-        telematicsService.Report(vehicleInfo);
+        // calling / exucting telematics service method
+        telematicsService.report(vehicleInfo);
+
 
     }
 
