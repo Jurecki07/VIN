@@ -12,7 +12,10 @@ import java.util.List;
 import java.util.Scanner;
 
 public class TelematicsService {
-    void Report(VehicleInfo vehicleInfo) {
+    public static void Report(VehicleInfo vehicleInfo) {
+
+
     }
+
 }
 
